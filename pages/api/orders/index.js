@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import registeration from "../../models/registeration";
-mongoose.connect("mongodb://localhost:27017/magento");
+mongoose.connect("mongodb+srv://davinder:davinder@cluster0.n2e6kfu.mongodb.net/magento");
 export default async function handler(req, res) {
     // console.log(req.body);
     // res.json(req.body)

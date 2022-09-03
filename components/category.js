@@ -11,9 +11,9 @@ const Category = () => {
   <button className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   Electronics
   </button>
-  <ul className="dropdown-menu rounded-md  bg-slate-100" aria-labelledby="dropdownMenuButton1">
+  <ul className="dropdown-menu rounded-md  bg-orange-100" aria-labelledby="dropdownMenuButton1">
     <li><a href="/product?category=electronics" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >All</a></li>
-    <li><a href="/product?type=mobiles" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Refrigerators</a></li>
+    <li><a href="/product?type=referigerator" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Referigerators</a></li>
     <li><a href="/product?type=washing machine" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Washing Machines</a></li>
     <li><a href="/product?type=computers" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Computers</a></li>
     <li><a href="/product?type=laptops" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Laptops</a></li>
@@ -29,7 +29,7 @@ const Category = () => {
   <button className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   Footwear
   </button>
-  <ul className="dropdown-menu rounded-md  bg-slate-100" aria-labelledby="dropdownMenuButton1">
+  <ul className="dropdown-menu rounded-md  bg-orange-100" aria-labelledby="dropdownMenuButton1">
     <li><a href="/product?category=footwear" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >All</a></li>
     <li><a href="/product?type=nike" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Nike</a></li>
     <li><a href="/product?type=relaxo" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Relaxo</a></li>
@@ -45,7 +45,7 @@ const Category = () => {
   <button className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   Grocery
   </button>
-  <ul className="dropdown-menu rounded-md  bg-slate-100" aria-labelledby="dropdownMenuButton1">
+  <ul className="dropdown-menu rounded-md  bg-orange-100" aria-labelledby="dropdownMenuButton1">
     <li><a href="/product?category=grocery" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >All</a></li>
     <li><a href="/product?type=almond" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Almond–Badam </a></li>
     <li><a href="/product?type=apricot" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Apricot–Khubani</a></li>
@@ -59,7 +59,7 @@ const Category = () => {
   <button className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   Jawellary
   </button>
-  <ul className="dropdown-menu rounded-md  bg-slate-100" aria-labelledby="dropdownMenuButton1">
+  <ul className="dropdown-menu rounded-md  bg-orange-100" aria-labelledby="dropdownMenuButton1">
     <li><a href="/product?category=jawellary" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >All</a></li>
     <li><a href="/product?type=ring" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Ring</a></li>
     <li><a href="/product?type=bracelet" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Bracelet</a></li>
@@ -73,12 +73,11 @@ const Category = () => {
   <button className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   Books
   </button>
-  <ul className="dropdown-menu rounded-md  bg-slate-100" aria-labelledby="dropdownMenuButton1">
+  <ul className="dropdown-menu rounded-md  bg-orange-100" aria-labelledby="dropdownMenuButton1">
     <li><a href="/product?category=books" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >All</a></li>
     <li><a href="/product?type=action and adventure" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Action and Adventure</a></li>
     <li><a href="/product?type=classics" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Classics</a></li>
-    <li><a href="/product?type=comic book" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Comic Book</a></li>
-    <li><a href="/product?type=detective and mystery" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Detective and Mystery</a></li>
+    <li><a href="/product?type=comic" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Comic</a></li>
     <li><a href="/product?type=horror" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Horror</a></li>
   </ul>
         </div>       </div>
@@ -88,33 +87,47 @@ const Category = () => {
   <button className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   Mobile
   </button>
-  <ul className="dropdown-menu rounded-md  bg-slate-100" aria-labelledby="dropdownMenuButton1">
+  <ul className="dropdown-menu rounded-md  bg-orange-100" aria-labelledby="dropdownMenuButton1">
     <li><a href="/product?category=mobile" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >All</a></li>
     <li><a href="/product?type=samsung" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Samsung</a></li>
-    <li><a href="/product?type=xiaomi" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Xiaomi</a></li>
     <li><a href="/product?type=vivo" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Vivo</a></li>
     <li><a href="/product?type=oppo" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >OPPO</a></li>
     <li><a href="/product?type=apple" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Apple</a></li>
-    <li><a href="/product?type=tecno" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Tecno</a></li>
   </ul>
         </div>       </div>
     <div className="w-28 xsm:w-24 mb-2 h-auto border-2 shadow-xl rounded-lg cursor-pointer ">
       <div className=''><img src="/fashion.jpg" className='w-full h-20 xsm:h-16' alt="" /></div>
-  <div className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600 " >
-  Fashion
-  </div>
+      <div className="dropdown">
+  <button className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  Clothes
+  </button>
+  <ul className="dropdown-menu rounded-md  bg-orange-100" aria-labelledby="dropdownMenuButton1">
+    <li><a href="/product?category=clothes" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >All</a></li>
+    <li><a href="/product?type=t-shirts" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >T-Shirts</a></li>
+    <li><a href="/product?type=shirts" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Shirts</a></li>
+    <li><a href="/product?type=pents" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Pents</a></li>
+  </ul>
+        </div>
          </div>
-    <div className="w-28 xsm:w-24 mb-2 h-auto border-2 shadow-xl rounded-lg cursor-pointer ">
+    <a className="w-28 xsm:w-24 mb-2 h-auto border-2 shadow-xl rounded-lg cursor-pointer " href='/product?category=toys'>
       <div className=''><img src="/toys.jpg" className='w-full h-20 xsm:h-16' alt="" /></div>
   <div className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600  " >
   Toys
   </div>
-       </div>
+       </a>
     <div className="w-28 xsm:w-24 mb-2 h-auto border-2 shadow-xl rounded-lg cursor-pointer ">
-      <div className=''><img src="/travel.jpg" className='w-full h-20 xsm:h-16' alt="" /></div>
-  <div className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600 " >
-  Travel
-  </div>
+      <div className=''><img src="/fur.png" className='w-full h-20 xsm:h-16' alt="" /></div>
+      <div className="dropdown">
+  <button className="justify-center w-full text-center text-sm font-sans font-bold mt-2 hover:text-orange-600  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  Furniture
+  </button>
+  <ul className="dropdown-menu rounded-md  bg-orange-100" aria-labelledby="dropdownMenuButton1">
+    <li><a href="/product?category=furniture" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >All</a></li>
+    <li><a href="/product?type=beds" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Beds</a></li>
+    <li><a href="/product?type=sofas" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Sofas</a></li>
+    <li><a href="/product?type=chairs" className="dropdown-item  hover:bg-orange-400 font-medium text-center" >Chairs</a></li>
+  </ul>
+        </div>
     </div>
     </div>
     </div>

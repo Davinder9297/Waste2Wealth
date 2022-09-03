@@ -1,6 +1,6 @@
 import product from "../../../models/product"
 import mongoose from "mongoose";
-mongoose.connect("mongodb://localhost:27017/magento");
+mongoose.connect("mongodb+srv://davinder:davinder@cluster0.n2e6kfu.mongodb.net/magento");
 export default async function handler(req, res) {
     if (req.method === 'POST') {
             let p = new product(req.body );

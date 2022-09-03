@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import cookie from 'js-cookie'
+import Router from 'next/router'
 const Register = () => {
     const [firstname, setfirstname] = useState('')
     const [lastname, setlastname] = useState('')
@@ -13,6 +15,7 @@ const Register = () => {
 
     const handlesubmit=async (e)=>{
         e.preventDefault();    
+
     const data={firstname,lastname,email,password,cpassword,address,phone}
         if(data.password!==data.cpassword){
             toast.warning('Passwords must be same', {
@@ -58,6 +61,10 @@ const Register = () => {
                     progress: undefined,
                     
                     });
+                    cookie.set('token',response.token);
+                    setTimeout(() => {
+                     Router.push('/');
+                    }, 3000);
               }
               
         }

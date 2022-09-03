@@ -133,8 +133,8 @@ return(
 
 export default Ex
 export async function getServerSideProps(context) {
-    mongoose.connect("mongodb://localhost:27017/magento");
-    const data=await fetch(`http://localhost:3000/api/cart`);
+  mongoose.connect("mongodb+srv://davinder:davinder@cluster0.n2e6kfu.mongodb.net/magento");
+  const data=await fetch(`http://localhost:3000/api/cart`);
     const res=await data.json();
     return {
       props: {res},

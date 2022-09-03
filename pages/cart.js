@@ -154,7 +154,7 @@ return(
 
 export default Trail
 export async function getStaticProps() {
-  mongoose.connect("mongodb://localhost:27017/magento");
+  mongoose.connect("mongodb+srv://davinder:davinder@cluster0.n2e6kfu.mongodb.net/magento");
   const data=await fetch('http://localhost:3000/api/cart');
   const res=await data.json();
   return {

@@ -101,7 +101,7 @@ export default Adress
 export async function getServerSideProps(context) {
   let q=context.query.q;
   let pay=context.query.pay;
-  mongoose.connect("mongodb://localhost:27017/magento");
+  mongoose.connect("mongodb+srv://davinder:davinder@cluster0.n2e6kfu.mongodb.net/magento");
   const data=await fetch(`http://localhost:3000/api/allproducts/${q}`);
   const res=await data.json();
   return {

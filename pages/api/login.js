@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
 import registeration from "../../models/registeration";
 import jwt from 'jsonwebtoken'
-mongoose.connect("mongodb://localhost:27017/magento");
+mongoose.connect("mongodb+srv://davinder:davinder@cluster0.n2e6kfu.mongodb.net/magento");
 export default async function handler(req, res) {
-    // console.log(req.body);
-    // res.json(req.body)
     const password=req.body.password;
             const email=req.body.email;
             let data= await registeration.findOne({ $and: [ {password}, {email} ] });

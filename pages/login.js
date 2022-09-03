@@ -7,19 +7,29 @@ import cookie from 'js-cookie'
 const Login = () => {
     const [email, setemail] = useState()
     const [password, setpassword] = useState()
+    const [showpassword, setshowpassword] = useState('password')
     const [spinner, setspinner] = useState('hidden')
+
+    const showpass=(e)=>{
+        if(e.target.checked){
+            setshowpassword('text');
+
+        }
+        else{
+            setshowpassword('password')
+        }
+    }
     const handlesubmit=async (e)=>{
 e.preventDefault();
 const data={email,password}
 const res=await fetch('http://localhost:3000/api/login', {
                 method: 'POST',
                 headers: {
-                  'content-Type': 'application/json',
+                  'Content-Type': 'application/json',
                 },
                 body:JSON.stringify(data),
               })
               let response=await res.json();
-// console.log(response.password);
 if(response.error){
     toast.warning('Invaild email address or password', {
         position: "top-right",
@@ -45,8 +55,9 @@ else{
         });
         setspinner('w-full flex justify-center mt-3');
       setTimeout(() => {
-        Router.push('/');
-        setspinner('')
+        let cok=cookie.get('oldpath');
+        Router.push(cok);
+        setspinner('hidden')
       }, 3000);
       cookie.set('token',response.token);
 }
@@ -78,13 +89,13 @@ else{
                 </label>
                 <label htmlFor="password">
                     <p className="font-medium text-slate-700 pb-2">Password</p>
-                    <input required={true} value={password}  onChange={(e) => { setpassword(e.target.value); }} id="password" name="password" type="password" className="w-full py-2 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" placeholder="Enter your password"/>
+                    <input required={true} value={password}  onChange={(e) => { setpassword(e.target.value); }} id="password" name="password" type={`${showpassword}`} className="w-full py-2 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" placeholder="Enter your password"/>
                 </label>
                 <div className="flex flex-row justify-between font-semibold">
                     <div>
                         <label htmlFor="remember" className="">
-                            <input type="checkbox" id="remember" className="w-4 h-4 mr-2 border-slate-200 focus:bg-orange-600"/>
-                            Remember me
+                            <input type="checkbox" id="remember" className="w-4 h-4 mr-2 border-slate-200 focus:bg-orange-600" onChange={showpass}/>
+                            Show password
                         </label>
                     </div>
                     <div>

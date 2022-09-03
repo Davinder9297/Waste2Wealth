@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { parseCookies } from 'nookies'
-
+import cookie from 'js-cookie'
 const Admin = () => {
     const [category, setcategory] = useState('')
     const [type, settype] = useState('')
@@ -87,9 +87,9 @@ pauseOnHover
                                 <option value="jawellary">Jawellary</option>
                                 <option value="books">Books</option>
                                 <option value="mobile">Mobile</option>
-                                <option value="fashion">Fashion</option>
+                                <option value="clothes">Clothes</option>
                                 <option value="toys">Toys</option>
-                                <option value="travel">Travel</option>
+                                <option value="furniture">Furniture</option>
                             </select>
                         </div>
                     </div>
@@ -138,9 +138,11 @@ export default Admin
 export async function getServerSideProps(context) {
     let {token}=parseCookies(context)
     const {res}=context
+    console.log("dfa");
     if(!token){
-    res.writeHead(302,{Location:"/login"});
-    res.end()
+
+cookie.set('oldpath','/admin')        // res.writeHead(302,{Location:"/login"});
+    // res.end()
     }
       return {
         props: {},

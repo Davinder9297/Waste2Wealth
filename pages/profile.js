@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { parseCookies } from 'nookies';
 import jwtDecode from 'jwt-decode';
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken'
+
 const Profile = (props) => {
  const [data, setdata] = useState(props.response)
   return (
@@ -14,7 +16,7 @@ const Profile = (props) => {
     <div className='h-48 w-48 mt-2'><img src="/dp.jpg" className='w-full h-full rounded-full' alt="" /></div>
     </div>
     <div className='text-3xl font-medium text-gray-700 text-center font-mono mt-2'>{data.firstname} {data.lastname}</div>
-    <div className='text-xl font-medium text-gray-700 w-full justify-center mt-4 flex'>Joined on 16 March,2020</div>
+    <div className='text-xl font-medium text-gray-700 w-full justify-center mt-4 flex'>Joined on {data.date.slice(8,10)}-{data.date.slice(5,7)}-{data.date.slice(0,4)}</div>
     <span className="flex w-full justify-center my-5 py-2 border-l-2 border-gray-200 space-x-2s">
             <a className="text-gray-500 mx-2 ">
               <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
@@ -69,10 +71,11 @@ export async function getServerSideProps(context) {
   let user=jwtDecode(token);
   let id=user.user;
   if(!token){
+    cookie.set('oldpath','/profile')
   res.writeHead(302,{Location:"/login"});
   res.end()
   }
-  mongoose.connect("mongodb://localhost:27017/magento");
+  mongoose.connect("mongodb+srv://davinder:davinder@cluster0.n2e6kfu.mongodb.net/magento");
   const res1=await fetch(`http://localhost:3000/api/profile?_id=${id}`)
   let response=await res1.json();
     return {

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import {TbCurrencyRupee} from 'react-icons/tb'
 import { parseCookies } from 'nookies'
-
+import cookie from 'js-cookie'
 const Slug = (props) => {
   let router=useRouter();
   const [id, setid] = useState('');
@@ -12,19 +12,22 @@ const Slug = (props) => {
   const [cart, setcart] = useState('');
   const handlebuy=()=>{
     let {token}=parseCookies();
-    // router.push('/login')
+    let q=router.query.slug;
     if(token){
-      setpath('buy')
+      setpath(`/buy?q=${q}`)
     }
     else{
-      setpath('login')
+      cookie.set('oldpath',`/buy?q=${q}`)
+      setpath(`login`)
     }
   }
   const handlesubmit=async(e)=>{
     e.preventDefault();
     let {token}=parseCookies();
     if(!token){
-   router.push('/login');
+      let q=router.query.slug;
+      cookie.set('oldpath','')
+      router.push(`/login?q=${q}`);
     }
     else{
 const data={id}
@@ -42,7 +45,7 @@ const resp=await fetch('http://localhost:3000/api/cart', {
   return (
     <section className='h-auto w-full justify-center flex mt-20'> 
     <div className='flex w-[90%]  border-1 rounded-2xl shadow-2xl  md:flex-col sm:flex-col xsm:flex-col justify-center' >
-        <div className='h-fit 2xl:h-full md:h-full justify-center flex w-full '><img src={data.image} className='h-full 2xl:w-fit   w-full md:w-fit ' alt="" /></div>
+        <div className='h-70vh px-2 items-center  2xl:h-full md:h-full justify-center flex w-[50%] '><img src={data.image} className='h-fit 2xl:w-fit   w-fit md:w-fit ' alt="" /></div>
         <div className=' bg-slate-100 p-4 rounded-2xl w-[90%] xsm:w-[100%] sm:mx-auto md:mx-auto   xsm:mx-0 xsm:p-0'>
         <h1 className="text-gray-900 text-2xl title-font font-medium mb-1">{data.title}</h1>
         <div className="flex mb-4">
@@ -110,7 +113,7 @@ const resp=await fetch('http://localhost:3000/api/cart', {
 
 export default Slug
 export async function getServerSideProps(context) {
-  mongoose.connect("mongodb://localhost:27017/magento");
+  mongoose.connect("mongodb+srv://davinder:davinder@cluster0.n2e6kfu.mongodb.net/magento");
   const slug=context.query.slug;
   const data=await fetch(`http://localhost:3000/api/allproducts/${slug}`);
   const resp=await data.json();
