@@ -24,7 +24,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-toastify": "^9.0.8",
-    "tw-elements": "^1.0.0-alpha12"
+    "tw-elements": "^1.0.0-alpha12",
+    "vercel": "^28.2.2"
   },
   "devDependencies": {
     "eslint": "8.21.0",

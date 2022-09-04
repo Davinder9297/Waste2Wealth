@@ -2,31 +2,48 @@ import React, { useState } from 'react'
 import {MdDeleteForever} from 'react-icons/md'
 import {HiOutlineRefresh} from 'react-icons/hi'
 import {BsCart4} from 'react-icons/bs'
+
 import mongoose from 'mongoose'
 import Link from 'next/link'
+import Router, { useRouter }  from 'next/router'
 const Trail = (props) => {
-  const [allcart, setallcart] = useState(props.res);
-  const [product, setproduct] = useState(props.product);
+  const [allcart, setallcart] = useState(props.r);
+  const [showp, setshowp] = useState(props.s);
   const [id, setid] = useState('');
   let tt=0;
   let tcount=0;
   let finalitem=1;
   return (
     <section className='w-full h-auto justify-center flex min-h-screen'>
-        <div className='w-[90%] h-fit  shadow-2xl mt-5 rounded-lg  justify-center max-w-[1210px]'>
-          <div className='text-5xl font-medium font-p flex justify-center animate-pulse'>Shopping cart <BsCart4 className='ml-2'/></div>
+        <div className='w-[90%]  h-fit  shadow-2xl mt-5 rounded-lg  justify-center max-w-[1210px]'>
+          <div className='text-5xl font-medium font-p flex justify-center animate-pulse'>
+            <div className='flex'>Your orders<a href='/orders' className='text-black text-3xl mt-2 ml-4'><HiOutlineRefresh  /></a>
+</div>
+
+          </div>
+          <div className={` w-full mx-auto  ${showp}`}>
+            <div className='h-56 w-56 mx-auto'><img src="/no.png" alt="" className='w-full h-full' /></div>
+          <div className='text-4xl font-serif text-center mt-2 '>  
+          You haven't placed an order
+          </div>
+          </div>
+
             <div className='w-full flex-col justify-center h-auto mt-4'>
+
             {allcart.map((element)=>{
             const [count, setcount] = useState(element.count)
             const [image, setimage] = useState(element.image)
             let t=element.price.replace(',','');
-            const [totalprice, settotalprice] = useState(element.totalprice);
+            const [totalprice, settotalprice] = useState(element.total);
             const [dis, setdis] = useState('');
             const [show, setshow] = useState('');
 
             tt+=Number(totalprice);
             tcount+=count;
             finalitem=tcount;
+
+            
+
 const handledec=async()=>{
  setcount(count>1?count-1:1);
  settotalprice(t*(count-1));
@@ -46,8 +63,8 @@ const handleinc=async()=>{
 const handledelete=async(e)=>{
   e.preventDefault();
   let data={id};
-  console.log(data);
-  const res=await fetch('http://localhost:3000/api/cart/delete', {
+  // setshowp('')
+  const res=await fetch('http://localhost:3000/api/orders/cancel', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -61,8 +78,8 @@ const handledelete=async(e)=>{
 }
 const handlesubmit=async(e)=>{
   e.preventDefault();
-  let data={count,totalprice,image};
-  const res=await fetch('http://localhost:3000/api/cart', {
+  let data={count,total:totalprice,image,title:element.title,price:element.price};
+  const res=await fetch('http://localhost:3000/api/orders', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -73,7 +90,7 @@ const handlesubmit=async(e)=>{
               let response=await res.json(); 
               
 };
-return(
+return(<>
   <div key={element._id} className={`flex cursor-pointer w-full justify-between shadow-lg hover:bg-orange-50 mx-auto mb-3 ${show}`}>
 <div className='w-56 h-28 my-auto  '><img src={element.image} className='h-fit mx-auto  w-24 rounded-xl' alt="" /></div>
 <div className='flex-col h-auto  w-full '>
@@ -90,23 +107,23 @@ return(
               </form>
             </div>
 <div className='flex-col space-y-24'>
-<form action="/cart" method='POST' onSubmit={handledelete}><div className='text-3xl text-center mt-2'><button onClick={()=>{setid(element._id);
+<form action="/cart" method='POST' onSubmit={handledelete}><button className='bg-orange-400 mt-2 w-32 rounded text-center' onClick={()=>{setid(element._id);
   setshow('hidden');
-}}  type='submit' ><MdDeleteForever/></button></div>
+}}  type='submit' >Cancel item</button>
 </form>
         <div className='font-bold text-lg mr-3'>₹{totalprice}</div>
                  </div>
                 </div>
-                
+                </>       
 )
 })}
                
             </div>
-            <div className='w-full h-auto  flex justify-center mt-5'>
+            {/* <div className='w-full h-auto  flex justify-center mt-5'>
               <div className='w-2/4 bg-orange-100 flex-col rounded-lg shadow-xl mb-2'>
                 <div className='flex w-full justify-around'>
                 <div className=' font-bold text-3xl mb-3 text-center'>Order summary</div>
-              <a href="/cart" className='my-auto text-2xl hover:text-orange-500'><HiOutlineRefresh/></a>
+              <a href="/orders" className='my-auto text-2xl hover:text-orange-500'><HiOutlineRefresh/></a>
                 </div>
                 
                 <div className='w-full h-auto flex justify-between' >
@@ -144,18 +161,24 @@ return(
                   <div className='ml-2 text-orange-500 font-medium '><Link href="/product"><a className='hover:text-orange-600'>Continue Shopping &rarr;</a></Link></div>
                   </div>      
               </div>
-            </div> 
+            </div>  */}
         </div>
     </section>
   )
 }
 
 export default Trail
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   mongoose.connect("mongodb+srv://davinder:davinder@cluster0.n2e6kfu.mongodb.net/magento");
-  const data=await fetch('http://localhost:3000/api/cart');
-  const res=await data.json();
+  const data=await fetch('http://localhost:3000/api/orders');
+  const r=await data.json();
+  // let {res}=context
+  let s='hidden'
+
+  if(r.length==0){
+s='';
+}
   return {
-    props: {res},
+    props: {r,s},
   }
 }

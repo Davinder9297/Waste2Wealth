@@ -14,7 +14,7 @@ const Slug = (props) => {
     let {token}=parseCookies();
     let q=router.query.slug;
     if(token){
-      setpath(`/buy?q=${q}`)
+      setpath(`buy`)
     }
     else{
       cookie.set('oldpath',`/buy?q=${q}`)
@@ -26,7 +26,7 @@ const Slug = (props) => {
     let {token}=parseCookies();
     if(!token){
       let q=router.query.slug;
-      cookie.set('oldpath','')
+      cookie.set('oldpath',`/product/${q}`)
       router.push(`/login?q=${q}`);
     }
     else{

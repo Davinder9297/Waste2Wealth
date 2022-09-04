@@ -44,15 +44,11 @@ const data={paymentmethod,email,nameoncard,cardnumber,expirationdate,cvc,address
   })
   let response=await res.json();
 let q=router.query.q;
-// console.log(q);
   if(data.paymentmethod==='Net banking'){
     router.push(`/otpverification?q=${q}&pay=${data.paymentmethod}`);
-    // setrouterpage(`/otpverification?q=${q}`)
   }
   else{
     router.push(`/address?q=${q}&pay=${data.paymentmethod}`);
-    // setrouterpage(`/adress?q=${q}`)
-    // console.log("q:" ,routerpage);
 
   }
 }
