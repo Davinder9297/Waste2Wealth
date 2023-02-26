@@ -1,122 +1,30 @@
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Router from 'next/router'
-import cookie from 'js-cookie'
-const Login = () => {
-    const [email, setemail] = useState()
-    const [password, setpassword] = useState()
-    const [showpassword, setshowpassword] = useState('password')
-    const [spinner, setspinner] = useState('hidden')
+import {BiLogIn} from 'react-icons/bi'
 
-    const showpass=(e)=>{
-        if(e.target.checked){
-            setshowpassword('text');
-
-        }
-        else{
-            setshowpassword('password')
-        }
-    }
-    const handlesubmit=async (e)=>{
-e.preventDefault();
-const data={email,password}
-const res=await fetch('http://localhost:3000/api/login', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body:JSON.stringify(data),
-              })
-              let response=await res.json();
-if(response.error){
-    toast.warning('Invaild email address or password', {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        
-        });
-}
-else{
-    toast.success('Login successfully', {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        
-        });
-        setspinner('w-full flex justify-center mt-3');
-      setTimeout(() => {
-        let cok=cookie.get('oldpath');
-        Router.push(cok);
-        setspinner('hidden')
-      }, 3000);
-      cookie.set('token',response.token);
-}
-    }
-  return (
-    <>
-    <ToastContainer
-    position="top-right"
-    autoClose={1000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    />
-    <div className={`${spinner}`}>
-   <img className='h-10 w-10' src="spinner.gif" alt="" />
+export default function Login(){
+    return(<>
+    <div className='whologin pb-6 w-full pt-12'>
+    <div className=" flex-col h-96 w-80 mx-auto pt-1 bg-white rounded-lg">
+<div className="font-s text-gray-600 font-semibold text-xl text-center">Login</div>
+<div className="font-s text-gray-600 mt-2 font-semibold text-xs text-center">Welcome to campus chronicles</div>
+<div className="flex-col px-3 mt-4 text-xs space-y-1">
+<div className='text-gray-600  font-semibold'>User Id</div>
+<input type="text" className='outline  outline-1 px-2 rounded-sm py-[6px] w-full outline-gray-300' placeholder="Enter User Id" />
+<div className='mt-2 text-gray-600  font-semibold'>Password</div>
+<input type="text" className='outline outline-1 rounded-sm py-[6px] px-2 w-full outline-gray-300' placeholder="Enter Password" />
+<div className='flex justify-around my-3'>
+    <div className='flex-col shadow-2xl w-28 py-2 rounded-lg'>
+        <div className='flex justify-center'><img src="student.svg" alt="" /></div>
+        <div className='flex text-xs  justify-center font-semibold mt-1'><input className='text-xs ' type="radio" name="profession" id="" /> <div className='ml-1'>STUDENT</div></div>
     </div>
-    <div className="max-w-md xsm:mx-2 justify-around backdrop-blur-sm bg-white/30 mx-auto my-10  p-8 rounded-xl  shadow shadow-slate-300">
-        <h1 className="text-4xl font-medium text-center font-s">Login</h1>
-      <p className="text-slate-500  font-semibold text-center mt-2 animate-pulse">Welcome to Magento</p> 
-        <form action=""  method='POST' className="my-4" onSubmit={handlesubmit}> 
-            <div className="flex flex-col space-y-4">
-                <label htmlFor="email">
-                    <p className="font-medium text-slate-700 pb-2">Email address</p>
-                    <input required={true} value={email}  onChange={(e) => { setemail(e.target.value); }} id="email" name="email" type="email" className="w-full py-2 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" placeholder="Enter email address"/>
-                </label>
-                <label htmlFor="password">
-                    <p className="font-medium text-slate-700 pb-2">Password</p>
-                    <input required={true} value={password}  onChange={(e) => { setpassword(e.target.value); }} id="password" name="password" type={`${showpassword}`} className="w-full py-2 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow" placeholder="Enter your password"/>
-                </label>
-                <div className="flex flex-row justify-between font-semibold">
-                    <div>
-                        <label htmlFor="remember" className="">
-                            <input type="checkbox" id="remember" className="w-4 h-4 mr-2 border-slate-200 focus:bg-orange-600" onChange={showpass}/>
-                            Show password
-                        </label>
-                    </div>
-                    <div>
-                        <a href="#" className="font-medium text-orange-600">Forgot Password?</a>
-                    </div>
-                </div>
-                <button className="w-full py-2 font-medium text-white bg-orange-600 hover:bg-orange-500 rounded-lg border-orange-500 hover:shadow inline-flex space-x-2 items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                      </svg>
-                      <span>Login</span>
-                </button>
-                <p className="text-center">Not registered yet?<Link href="/registeration"><a className="text-orange-600 font-medium inline-flex space-x-1 items-center ml-2"><span>Register now </span><span><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg></span></a></Link></p>
-            </div>
-        </form>
+    <div className='my-auto text-gray-600'>Or</div>
+    <div className='flex-col shadow-2xl w-28 py-2 rounded-lg'>
+        <div className='flex justify-center'><img src="faculty.svg" alt="" /></div>
+        <div className='flex text-xs  justify-center font-semibold mt-1'><input className='text-xs ' type="radio" name="profession" id="" /> <div className='ml-1'>FACULTY</div></div>
+    </div></div>
+<div className='flex bg-black text-white justify-center py-[6px] rounded-md mt-2 space-x-1'><BiLogIn className=' text-base mt-[2px] text-white' /> <button className='flex text-sm'> Login</button>
+</div>
+</div>
     </div>
-    
-</> 
-)
+    </div>
+    </>)
 }
-
-export default Login
